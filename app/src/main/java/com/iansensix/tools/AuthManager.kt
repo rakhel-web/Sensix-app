@@ -16,6 +16,6 @@ object AuthManager {
     }
 
     suspend fun login(key: String, hwid: String): Pair<Boolean, String> {
-        return Pair(true, "2026-12-31") // Simulasi sukses
+        return Pair(true, "2026-12-31")
     }
 }

@@ -113,9 +113,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupSocialButtons() {
-        // GANTI NOMOR WA & USERNAME TIKTOK LO DI SINI
-        val waNumber = "6281234567890"
-        val tiktokUser = "ianSENSIX"
+        val waNumber = "https://whatsapp.com/channel/0029Vb9KAhLAInPfIOzI6G2w" // GANTI NOMOR WA LO
+        val tiktokUser = "tiktok.com/@ianntitik"  // GANTI USERNAME TIKTOK LO
         
         findViewById<TextView>(R.id.btnWa).setOnClickListener {
             try { startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://wa.me/$waNumber?text=Halo%20ianSENSIX,%20saya%20mau%20tanya%20soal%20Sensix."))) } 
