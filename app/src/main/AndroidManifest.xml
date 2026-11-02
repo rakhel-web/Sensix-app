@@ -13,7 +13,7 @@
         android:icon="@android:drawable/ic_menu_manage"
         android:label="Sensix Pro"
         android:usesCleartextTraffic="true"
-        android:theme="@style/Theme.SensixPro"> <!-- GUE UBAH JADI Theme.SensixPro -->
+        android:theme="@style/Theme.SensixPro">
 
         <activity
             android:name=".MainActivity"
