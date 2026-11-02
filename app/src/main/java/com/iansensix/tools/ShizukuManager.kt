@@ -13,37 +13,32 @@ object ShizukuManager {
 
     fun isRunning(): Boolean = try { Shizuku.pingBinder() } catch (e: Exception) { false }
     fun hasPermission(): Boolean = try { Shizuku.checkSelfPermission() == PackageManager.PERMISSION_GRANTED } catch (e: Exception) { false }
-    fun requestPermission() { try { Shizuku.requestPermission(REQUEST_CODE) } catch (e: Exception) {} }
+    
+    fun requestPermission() { 
+        try { Shizuku.requestPermission(REQUEST_CODE) } catch (e: Exception) {} 
+    }
 
     suspend fun execute(script: String): String = withContext(Dispatchers.IO) {
         if (!hasPermission() || !isRunning()) return@withContext "ERROR: Shizuku belum aktif."
-        
         try {
             val cmd = arrayOf("sh", "-c", script)
             val env = arrayOf("PATH=/sbin:/system/sbin:/system/bin:/system/xbin")
             
-            // Trik casting: Panggil fungsinya, lalu ubah tipe datanya secara paksa jadi Array<ParcelFileDescriptor>
-            val rawPfd = Shizuku.newProcess(cmd, env, null)
-            val pfd = rawPfd as Array<ParcelFileDescriptor>
-
+            val pfdRaw = Shizuku.newProcess(cmd, env, null)
+            val pfd = pfdRaw as Array<ParcelFileDescriptor>
+            
             val stdout = BufferedReader(InputStreamReader(ParcelFileDescriptor.AutoCloseInputStream(pfd[0])))
             val stderr = BufferedReader(InputStreamReader(ParcelFileDescriptor.AutoCloseInputStream(pfd[2])))
-            
             val output = StringBuilder()
-            var line: String? 
-            while (stdout.readLine().also { line = it } != null) {
-                output.append(line).append("\n")
-            }
-            while (stderr.readLine().also { line = it } != null) {
-                output.append("ERR: ").append(line).append("\n")
-            }
+            var line: String?
             
-            stdout.close()
-            stderr.close()
+            while (stdout.readLine().also { line = it } != null) output.append(line).append("\n")
+            while (stderr.readLine().also { line = it } != null) output.append("ERR: ").append(line).append("\n")
             
+            stdout.close(); stderr.close()
             output.toString().ifEmpty { "OK: Script berhasil." }
-        } catch (e: Exception) {
-            "FATAL: ${e.message}"
+        } catch (e: Exception) { 
+            "FATAL: ${e.message}" 
         }
     }
 }

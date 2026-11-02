@@ -33,17 +33,20 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
-        initViews()
-        setupNavigation()
-        setupSensiSliders()
-        setupSocialButtons()
-        setupFreeFireLauncher()
-        setupShizukuListener()
-        
-        findViewById<TextView>(R.id.tvKeyDisplay).text = "ianSENSIX-PRO"
-        findViewById<TextView>(R.id.tvExpired).text = "Berlaku Sampai: 2026-12-31"
+        try {
+            setContentView(R.layout.activity_main)
+            initViews()
+            setupNavigation()
+            setupSensiSliders()
+            setupSocialButtons()
+            setupFreeFireLauncher()
+            setupShizukuListener()
+            
+            findViewById<TextView>(R.id.tvKeyDisplay).text = "ianSENSIX-PRO"
+            findViewById<TextView>(R.id.tvExpired).text = "Berlaku Sampai: 2026-12-31"
+        } catch (e: Exception) {
+            Toast.makeText(this, "Startup Error: ${e.message}", Toast.LENGTH_LONG).show()
+        }
     }
 
     private fun initViews() {
@@ -113,11 +116,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupSocialButtons() {
-        val waNumber = "https://whatsapp.com/channel/0029Vb9KAhLAInPfIOzI6G2w" // GANTI NOMOR WA LO
-        val tiktokUser = "tiktok.com/@ianntitik"  // GANTI USERNAME TIKTOK LO
-        
+        val waNumber = "6281234567890"
+        val tiktokUser = "ianSENSIX"
         findViewById<TextView>(R.id.btnWa).setOnClickListener {
-            try { startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://wa.me/$waNumber?text=Halo%20ianSENSIX,%20saya%20mau%20tanya%20soal%20Sensix."))) } 
+            try { startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://wa.me/$waNumber"))) } 
             catch (e: Exception) { Toast.makeText(this, "WhatsApp tidak ditemukan", Toast.LENGTH_SHORT).show() }
         }
         findViewById<TextView>(R.id.btnTiktok).setOnClickListener {
@@ -127,32 +129,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupFreeFireLauncher() {
-        findViewById<LinearLayout>(R.id.cardFreeFire).setOnClickListener { launchFreeFire() }
-    }
-
-    private fun launchFreeFire() {
-        val pm = packageManager
-        val pkgFF = "com.dts.freefireth"
-        val pkgFFMax = "com.dts.freefiremax"
-        
-        try {
-            val intentFF = pm.getLaunchIntentForPackage(pkgFF)
-            val intentFFMax = pm.getLaunchIntentForPackage(pkgFFMax)
-            val intentToLaunch = intentFF ?: intentFFMax
-
-            if (intentToLaunch != null) {
-                intentToLaunch.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                startActivity(intentToLaunch)
-                Toast.makeText(this, "Membuka Free Fire...", Toast.LENGTH_SHORT).show()
-            } else {
-                Toast.makeText(this, "Free Fire belum terinstall. Membuka Play Store...", Toast.LENGTH_LONG).show()
-                val playStoreIntent = Intent(Intent.ACTION_VIEW).apply {
-                    data = Uri.parse("market://details?id=$pkgFF")
-                }
-                startActivity(playStoreIntent)
+        findViewById<LinearLayout>(R.id.cardFreeFire).setOnClickListener {
+            try {
+                val intent = packageManager.getLaunchIntentForPackage("com.dts.freefireth")
+                if (intent != null) startActivity(intent) else Toast.makeText(this, "FF tidak terinstall", Toast.LENGTH_SHORT).show()
+            } catch (e: Exception) {
+                Toast.makeText(this, "Gagal buka game", Toast.LENGTH_SHORT).show()
             }
-        } catch (e: Exception) {
-            Toast.makeText(this, "Gagal membuka game: ${e.message}", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -161,16 +144,14 @@ class MainActivity : AppCompatActivity() {
         isMonitoring = true
         lifecycleScope.launch {
             while (isMonitoring && tabProfile.visibility == View.VISIBLE) {
-                val cpu = MonitorEngine.getCpuLoad()
-                val ram = MonitorEngine.getRamUsage(this@MainActivity)
-                val gpu = MonitorEngine.getGpuLoad()
-                val ping = MonitorEngine.getPing()
-
-                tvCpu.text = cpu
-                tvRam.text = ram
-                tvGpu.text = gpu
-                tvPing.text = ping
-                
+                try {
+                    tvCpu.text = MonitorEngine.getCpuLoad()
+                    tvRam.text = MonitorEngine.getRamUsage(this@MainActivity)
+                    tvGpu.text = MonitorEngine.getGpuLoad()
+                    tvPing.text = MonitorEngine.getPing()
+                } catch (e: Exception) {
+                    // Abaikan error monitoring biar app gak crash
+                }
                 delay(1500L)
             }
             isMonitoring = false
@@ -178,34 +159,44 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupShizukuListener() {
-        Shizuku.addRequestPermissionResultListener { requestCode, grantResult ->
-            if (requestCode == ShizukuManager.REQUEST_CODE) updateShizukuStatus()
+        try {
+            Shizuku.addRequestPermissionResultListener { requestCode, grantResult ->
+                if (requestCode == ShizukuManager.REQUEST_CODE) updateShizukuStatus()
+            }
+            updateShizukuStatus()
+        } catch (e: Exception) {
+            tvStatus.text = "Status: Gagal inisialisasi Shizuku"
         }
-        updateShizukuStatus()
     }
 
     private fun updateShizukuStatus() {
-        if (!ShizukuManager.isRunning()) {
-            tvStatus.text = "Status: Shizuku OFF (Buka aplikasi Shizuku)"
-            tvStatus.setTextColor(Color.RED)
-        } else if (!ShizukuManager.hasPermission()) {
-            tvStatus.text = "Status: Meminta izin Shizuku..."
-            tvStatus.setTextColor(Color.YELLOW)
-            ShizukuManager.requestPermission()
-        } else {
-            tvStatus.text = "Status: Connected (UID 2000)"
-            tvStatus.setTextColor(Color.parseColor("#00E676"))
-        }
+        try {
+            if (!ShizukuManager.isRunning()) {
+                tvStatus.text = "Status: Shizuku OFF"
+                tvStatus.setTextColor(Color.RED)
+            } else if (!ShizukuManager.hasPermission()) {
+                tvStatus.text = "Status: Meminta izin Shizuku..."
+                tvStatus.setTextColor(Color.YELLOW)
+                ShizukuManager.requestPermission()
+            } else {
+                tvStatus.text = "Status: Connected (UID 2000)"
+                tvStatus.setTextColor(Color.parseColor("#00E676"))
+            }
+        } catch (e: Exception) {}
     }
 
     private fun runScript(script: String) {
         if (!ShizukuManager.hasPermission()) {
-            Toast.makeText(this, "Shizuku belum aktif / izin ditolak!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Shizuku belum aktif!", Toast.LENGTH_SHORT).show()
             return
         }
-        tvLog.text = "Mengeksekusi perintah..."
+        tvLog.text = "Mengeksekusi..."
         lifecycleScope.launch {
-            tvLog.text = ShizukuManager.execute(script)
+            try {
+                tvLog.text = ShizukuManager.execute(script)
+            } catch (e: Exception) {
+                tvLog.text = "Gagal eksekusi: ${e.message}"
+            }
         }
     }
 
