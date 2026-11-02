@@ -26,25 +26,14 @@
                 android:orientation="vertical"
                 android:padding="20dp">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:layout_marginBottom="24dp">
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Home"
-                        android:textColor="#FFFFFF"
-                        android:textSize="28sp"
-                        android:textStyle="bold" />
-                    <TextView
-                        android:text="By Sensix"
-                        android:textColor="#00E676"
-                        android:textSize="12sp" />
-                </LinearLayout>
+                    android:text="Home"
+                    android:textColor="#FFFFFF"
+                    android:textSize="28sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="20dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -52,46 +41,33 @@
                     android:background="@drawable/bg_card_gradient"
                     android:orientation="vertical"
                     android:padding="20dp">
+                    
                     <TextView
-                        android:text="GAME&#10;SENSIX"
+                        android:text="GAME SENSIX"
                         android:textColor="#FFFFFF"
                         android:textSize="22sp"
-                        android:textStyle="bold"
-                        android:lineSpacingExtra="-4dp" />
+                        android:textStyle="bold" />
+                        
                     <TextView
                         android:text="V2.0.0-PRO"
                         android:textColor="#A0C0B0"
                         android:textSize="12sp"
                         android:layout_marginTop="4dp" />
+                        
                     <Space
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1" />
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical">
-                        <TextView
-                            android:text="∞"
-                            android:textColor="#00E676"
-                            android:textSize="24sp"
-                            android:textStyle="bold" />
-                        <TextView
-                            android:text="Energi"
-                            android:textColor="#FFFFFF"
-                            android:textSize="14sp"
-                            android:layout_marginStart="8dp"
-                            android:layout_weight="1" />
-                        <Button
-                            android:id="@+id/btnGoToInject"
-                            android:layout_width="120dp"
-                            android:layout_height="50dp"
-                            android:text="Tuning"
-                            android:textColor="#000000"
-                            android:textStyle="bold"
-                            android:background="@drawable/bg_btn_gradient" />
-                    </LinearLayout>
+                        
+                    <Button
+                        android:id="@+id/btnGoToInject"
+                        android:layout_width="120dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="end"
+                        android:text="Tuning"
+                        android:textColor="#000000"
+                        android:textStyle="bold"
+                        android:background="@drawable/bg_btn_gradient" />
                 </LinearLayout>
 
                 <TextView
@@ -110,27 +86,14 @@
                     android:padding="16dp"
                     android:orientation="horizontal"
                     android:gravity="center_vertical">
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:background="#333333"
-                        android:src="@android:drawable/ic_menu_gallery" />
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:layout_marginStart="16dp"
-                        android:orientation="vertical">
-                        <TextView
-                            android:text="Free Fire"
-                            android:textColor="#FFFFFF"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-                        <TextView
-                            android:text="Ketuk untuk buka game"
-                            android:textColor="#8B949E"
-                            android:textSize="12sp" />
-                    </LinearLayout>
+                    
+                    <TextView
+                        android:text="Free Fire"
+                        android:textColor="#FFFFFF"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:layout_weight="1" />
+                        
                     <TextView
                         android:text=">"
                         android:textColor="#FFFFFF"
@@ -145,46 +108,21 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:visibility="gone">
+            
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="20dp">
                 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:layout_marginBottom="20dp">
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Profile"
-                        android:textColor="#FFFFFF"
-                        android:textSize="28sp"
-                        android:textStyle="bold" />
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical"
-                        android:background="@drawable/bg_nav_indicator"
-                        android:paddingHorizontal="12dp"
-                        android:paddingVertical="6dp">
-                        <TextView
-                            android:text="ianSENSIX"
-                            android:textColor="#00E676"
-                            android:textSize="14sp"
-                            android:textStyle="bold" />
-                        <TextView
-                            android:text="✔"
-                            android:textColor="#00E676"
-                            android:textSize="12sp"
-                            android:layout_marginStart="6dp" />
-                    </LinearLayout>
-                </LinearLayout>
+                    android:text="Profile"
+                    android:textColor="#FFFFFF"
+                    android:textSize="28sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="20dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -192,12 +130,14 @@
                     android:background="#00E676"
                     android:padding="16dp"
                     android:orientation="vertical">
+                    
                     <TextView
                         android:id="@+id/tvKeyDisplay"
                         android:text="ianSENSIX-PRO"
                         android:textColor="#003300"
                         android:textSize="18sp"
                         android:textStyle="bold" />
+                        
                     <TextView
                         android:id="@+id/tvExpired"
                         android:text="Berlaku Sampai: -"
@@ -213,16 +153,12 @@
                     android:orientation="vertical"
                     android:padding="16dp"
                     android:layout_marginTop="16dp">
-                    <TextView
-                        android:text="PENGATURAN SENSITIVITAS"
-                        android:textColor="#8B949E"
-                        android:textSize="12sp"
-                        android:textStyle="bold" />
+                    
                     <TextView
                         android:id="@+id/tvSensiX"
                         android:text="Sensi X : 100"
                         android:textColor="#FFFFFF"
-                        android:layout_marginTop="12dp" />
+                        android:layout_marginTop="8dp" />
                     <SeekBar
                         android:id="@+id/seekSensiX"
                         android:layout_width="match_parent"
@@ -231,11 +167,12 @@
                         android:progress="100"
                         android:progressTint="#29B6F6"
                         android:thumbTint="#29B6F6" />
+                        
                     <TextView
                         android:id="@+id/tvSensiY"
                         android:text="Sensi Y : 100"
                         android:textColor="#FFFFFF"
-                        android:layout_marginTop="12dp" />
+                        android:layout_marginTop="8dp" />
                     <SeekBar
                         android:id="@+id/seekSensiY"
                         android:layout_width="match_parent"
@@ -244,170 +181,134 @@
                         android:progress="100"
                         android:progressTint="#00E676"
                         android:thumbTint="#00E676" />
+                        
                     <Button
                         android:id="@+id/btnApplySensi"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
                         android:layout_marginTop="12dp"
-                        android:text="Terapkan Sensitivitas"
+                        android:text="Terapkan"
                         android:backgroundTint="#333333"
                         android:textColor="#FFFFFF" />
                 </LinearLayout>
 
-                <TextView
-                    android:text="Pemantauan Real-time"
-                    android:textColor="#FFFFFF"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="10dp" />
-                
-                <GridLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:columnCount="2"
-                    android:rowCount="2">
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_columnWeight="1"
-                        android:layout_margin="4dp"
-                        android:background="@drawable/bg_card_dark"
-                        android:orientation="vertical"
-                        android:padding="12dp">
-                        <TextView android:text="CPU" android:textColor="#8B949E" android:textSize="10sp"/>
-                        <TextView android:id="@+id/tvCpu" android:text="0%" android:textColor="#00E676" android:textSize="20sp" android:textStyle="bold" android:layout_marginTop="8dp"/>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_columnWeight="1"
-                        android:layout_margin="4dp"
-                        android:background="@drawable/bg_card_dark"
-                        android:orientation="vertical"
-                        android:padding="12dp">
-                        <TextView android:text="GPU" android:textColor="#8B949E" android:textSize="10sp"/>
-                        <TextView android:id="@+id/tvGpu" android:text="0%" android:textColor="#00E676" android:textSize="20sp" android:textStyle="bold" android:layout_marginTop="8dp"/>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_columnWeight="1"
-                        android:layout_margin="4dp"
-                        android:background="@drawable/bg_card_dark"
-                        android:orientation="vertical"
-                        android:padding="12dp">
-                        <TextView android:text="RAM" android:textColor="#8B949E" android:textSize="10sp"/>
-                        <TextView android:id="@+id/tvRam" android:text="0 MB" android:textColor="#00E676" android:textSize="20sp" android:textStyle="bold" android:layout_marginTop="8dp"/>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_columnWeight="1"
-                        android:layout_margin="4dp"
-                        android:background="@drawable/bg_card_dark"
-                        android:orientation="vertical"
-                        android:padding="12dp">
-                        <TextView android:text="PING" android:textColor="#8B949E" android:textSize="10sp"/>
-                        <TextView android:id="@+id/tvPing" android:text="0 ms" android:textColor="#00E676" android:textSize="20sp" android:textStyle="bold" android:layout_marginTop="8dp"/>
-                    </LinearLayout>
-                </GridLayout>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Dukung Kami"
-                    android:textColor="#FFFFFF"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginBottom="12dp" />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/bg_card_gradient"
                     android:orientation="horizontal"
-                    android:padding="16dp"
-                    android:gravity="center_vertical"
-                    android:layout_marginBottom="24dp">
-                    <TextView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:text="⚡"
-                        android:textSize="20sp"
-                        android:textColor="#00E676"
-                        android:gravity="center"
-                        android:background="@drawable/bg_nav_indicator"
-                        android:layout_marginEnd="12dp" />
+                    android:layout_marginTop="16dp">
+                    
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:orientation="vertical">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Gabung Saluran Resmi"
-                            android:textColor="#FFFFFF"
-                            android:textSize="14sp"
-                            android:textStyle="bold" />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Update &amp; info penting."
-                            android:textColor="#A0C0B0"
-                            android:textSize="11sp"
-                            android:layout_marginTop="4dp" />
+                        android:layout_marginEnd="8dp"
+                        android:background="@drawable/bg_card_dark"
+                        android:orientation="vertical"
+                        android:padding="12dp">
+                        <TextView android:text="CPU" android:textColor="#8B949E" android:textSize="10sp"/>
+                        <TextView android:id="@+id/tvCpu" android:text="0%" android:textColor="#00E676" android:textSize="18sp" android:textStyle="bold"/>
                     </LinearLayout>
+                    
                     <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_card_dark"
+                        android:orientation="vertical"
+                        android:padding="12dp">
+                        <TextView android:text="PING" android:textColor="#8B949E" android:textSize="10sp"/>
+                        <TextView android:id="@+id/tvPing" android:text="0 ms" android:textColor="#00E676" android:textSize="18sp" android:textStyle="bold"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="8dp">
+                    
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="8dp"
+                        android:background="@drawable/bg_card_dark"
+                        android:orientation="vertical"
+                        android:padding="12dp">
+                        <TextView android:text="GPU" android:textColor="#8B949E" android:textSize="10sp"/>
+                        <TextView android:id="@+id/tvGpu" android:text="0%" android:textColor="#00E676" android:textSize="18sp" android:textStyle="bold"/>
+                    </LinearLayout>
+                    
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_card_dark"
+                        android:orientation="vertical"
+                        android:padding="12dp">
+                        <TextView android:text="RAM" android:textColor="#8B949E" android:textSize="10sp"/>
+                        <TextView android:id="@+id/tvRam" android:text="0 MB" android:textColor="#00E676" android:textSize="18sp" android:textStyle="bold"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/bg_card_gradient"
+                    android:padding="16dp">
+                    
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Gabung Saluran Resmi"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="bold" />
+                        
+                    <TextView
+                        android:id="@+id/btnWa"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical"
-                        android:layout_marginStart="8dp">
-                        <TextView
-                            android:id="@+id/btnWa"
-                            android:layout_width="36dp"
-                            android:layout_height="36dp"
-                            android:text="WA"
-                            android:textColor="#00E676"
-                            android:textSize="11sp"
-                            android:textStyle="bold"
-                            android:gravity="center"
-                            android:background="@drawable/bg_nav_indicator"
-                            android:layout_marginEnd="8dp"/>
-                        <TextView
-                            android:id="@+id/btnTiktok"
-                            android:layout_width="36dp"
-                            android:layout_height="36dp"
-                            android:text="TT"
-                            android:textColor="#00E676"
-                            android:textSize="11sp"
-                            android:textStyle="bold"
-                            android:gravity="center"
-                            android:background="@drawable/bg_nav_indicator" />
-                    </LinearLayout>
+                        android:text="WA"
+                        android:textColor="#00E676"
+                        android:textStyle="bold"
+                        android:padding="8dp"/>
+                        
+                    <TextView
+                        android:id="@+id/btnTiktok"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="TT"
+                        android:textColor="#00E676"
+                        android:textStyle="bold"
+                        android:padding="8dp"/>
                 </LinearLayout>
             </LinearLayout>
         </ScrollView>
 
-        <!-- TAB SETTINGS -->
+        <!-- TAB TUNING -->
         <ScrollView
             android:id="@+id/tabSettings"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:visibility="gone">
+            
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="20dp">
+                
                 <TextView
                     android:text="Tuning Engine"
                     android:textColor="#FFFFFF"
                     android:textSize="28sp"
                     android:textStyle="bold"
                     android:layout_marginBottom="20dp" />
+                    
                 <TextView
                     android:id="@+id/tvStatus"
                     android:layout_width="wrap_content"
@@ -416,6 +317,7 @@
                     android:textColor="#8B949E"
                     android:textSize="14sp"
                     android:layout_marginBottom="20dp" />
+                    
                 <Button
                     android:id="@+id/btnSmoothInject"
                     android:layout_width="match_parent"
@@ -424,15 +326,17 @@
                     android:textStyle="bold"
                     android:backgroundTint="#00E676"
                     android:textColor="#000000"/>
+                    
                 <Button
                     android:id="@+id/btnSmoothDrag"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:layout_marginTop="12dp"
-                    android:text="2. SMOOTH DRAG / AIM"
+                    android:text="2. SMOOTH DRAG"
                     android:textStyle="bold"
                     android:backgroundTint="#29B6F6"
                     android:textColor="#000000"/>
+                    
                 <Button
                     android:id="@+id/btnRestore"
                     android:layout_width="match_parent"
@@ -441,6 +345,7 @@
                     android:text="Restore Default"
                     android:backgroundTint="#333333"
                     android:textColor="#FFFFFF"/>
+                    
                 <TextView
                     android:id="@+id/tvLog"
                     android:layout_width="match_parent"
@@ -462,6 +367,7 @@
         android:gravity="center_vertical"
         android:padding="8dp"
         app:layout_constraintBottom_toBottomOf="parent">
+        
         <LinearLayout
             android:id="@+id/navHome"
             android:layout_width="0dp"
@@ -473,6 +379,7 @@
             <TextView android:text="⚡" android:textSize="20sp" android:textColor="#00E676" />
             <TextView android:text="Home" android:textSize="12sp" android:textColor="#00E676" android:textStyle="bold" />
         </LinearLayout>
+        
         <LinearLayout
             android:id="@+id/navProfile"
             android:layout_width="0dp"
@@ -484,6 +391,7 @@
             <TextView android:text="👤" android:textSize="20sp" android:textColor="#8B949E" />
             <TextView android:text="Profile" android:textSize="12sp" android:textColor="#8B949E" />
         </LinearLayout>
+        
         <LinearLayout
             android:id="@+id/navSettings"
             android:layout_width="0dp"
