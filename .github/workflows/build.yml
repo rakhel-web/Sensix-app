@@ -23,7 +23,7 @@ jobs:
     - name: Setup Gradle
       uses: gradle/gradle-build-action@v3
       with:
-        gradle-version: 8.2.2
+        gradle-version: 8.5  # Kita pake versi 8.5 yang pasti ada di GitHub
 
     - name: Build Debug APK
       run: gradle assembleDebug
