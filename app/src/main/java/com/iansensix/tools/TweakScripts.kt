@@ -1,5 +1,8 @@
 package com.iansensix.tools
+
 object TweakScripts {
+    
+    // 1. Tweak buat Optimasi Layar (Inject Smooth)
     fun getApplyScript() = """
         settings put system peak_refresh_rate 120
         settings put system min_refresh_rate 90
@@ -12,14 +15,33 @@ object TweakScripts {
         echo "Inject Smooth Applied!"
     """.trimIndent()
 
+    // 2. Tweak buat Aim/Drag (Smooth Drag Extreme - Slop 1)
     fun getDragScript() = """
-        settings put secure long_press_timeout 200
-        settings put secure multi_press_timeout 150
+        # Jeda sentuh lebih singkat (Aim instan)
+        settings put secure long_press_timeout 150
+        settings put secure multi_press_timeout 100
+        
+        # Touch Slop 1 (Sensitif tapi nggak goyang)
+        settings put secure touch_slop 1
+        
+        # Bebasin filter sentuhan (Swipe cepat gak di-drop)
         settings put secure touch_blocking_period 0
-        settings put system pointer_speed 7
-        echo "Smooth Drag Applied!"
+        
+        # Pointer speed OS dinaikin
+        settings put system pointer_speed 10
+        
+        # Prioritas proses game (Android 12+)
+        cmd game mode performance com.dts.freefireth
+        cmd game set --mode performance --downscale 1.0 com.dts.freefireth
+        
+        # Skala velocity fling (nambah jarak aim)
+        setprop debug.input.flinger_velocity_scale_x 1.5
+        setprop debug.input.flinger_velocity_scale_y 1.5
+        
+        echo "Smooth Drag Extreme Applied!"
     """.trimIndent()
 
+    // 3. Tweak buat balikin ke setelan awal (Restore)
     fun getRestoreScript() = """
         settings delete system peak_refresh_rate
         settings delete system min_refresh_rate
@@ -28,19 +50,9 @@ object TweakScripts {
         settings put global animator_duration_scale 1.0
         settings put secure long_press_timeout 400
         settings put secure multi_press_timeout 300
+        settings put secure touch_slop 8
         settings put secure touch_blocking_period 400
         settings put system pointer_speed 0
         echo "Restore Default Success!"
     """.trimIndent()
-
-    fun getSensiScript(sensiX: Int, sensiY: Int): String {
-        val xValue = (sensiX - 100) / 15
-        val slopValue = (16 - (sensiY / 15)).coerceAtLeast(1)
-        return """
-            settings put system pointer_speed $xValue
-            settings put secure touch_slop $slopValue
-            settings put secure touch_blocking_period 0
-            echo "Sensitivitas X=$sensiX Y=$sensiY diterapkan."
-        """.trimIndent()
-    }
 }
