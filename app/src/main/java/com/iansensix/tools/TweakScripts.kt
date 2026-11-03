@@ -15,28 +15,32 @@ object TweakScripts {
         echo "Inject Smooth Applied!"
     """.trimIndent()
 
-    // 2. Tweak buat Aim/Drag (Smooth Drag Extreme - Slop 1)
+    // 2. Tweak buat Aim/Drag (Smooth Drag Extreme - Slop 1 + Fix Limit)
     fun getDragScript() = """
-        # Jeda sentuh lebih singkat (Aim instan)
+        # 1. Jeda sentuh singkat
         settings put secure long_press_timeout 150
         settings put secure multi_press_timeout 100
         
-        # Touch Slop 1 (Sensitif tapi nggak goyang)
+        # 2. Touch Slop 1
         settings put secure touch_slop 1
         
-        # Bebasin filter sentuhan (Swipe cepat gak di-drop)
+        # 3. Bebasin filter sentuhan
         settings put secure touch_blocking_period 0
         
-        # Pointer speed OS dinaikin
-        settings put system pointer_speed 10
+        # 4. Pointer speed maksimal (angka 7 biar gak error)
+        settings put system pointer_speed 7
         
-        # Prioritas proses game (Android 12+)
+        # 5. Prioritas game
         cmd game mode performance com.dts.freefireth
         cmd game set --mode performance --downscale 1.0 com.dts.freefireth
         
-        # Skala velocity fling (nambah jarak aim)
-        setprop debug.input.flinger_velocity_scale_x 1.5
-        setprop debug.input.flinger_velocity_scale_y 1.5
+        # 6. Velocity fling (Bikin Drag makin jauh & cepet)
+        setprop debug.input.flinger_velocity_scale_x 2.0
+        setprop debug.input.flinger_velocity_scale_y 2.0
+        
+        # 7. Bypass touch latency render (buat aim nempel)
+        setprop debug.hwui.disable_vsync true
+        setprop debug.choreographer.skipwarning 1
         
         echo "Smooth Drag Extreme Applied!"
     """.trimIndent()
