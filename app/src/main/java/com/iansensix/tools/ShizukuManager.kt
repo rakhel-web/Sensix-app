@@ -1,7 +1,6 @@
 package com.iansensix.tools
 
 import android.content.pm.PackageManager
-import android.os.ParcelFileDescriptor
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import rikka.shizuku.Shizuku
@@ -11,34 +10,61 @@ import java.io.InputStreamReader
 object ShizukuManager {
     const val REQUEST_CODE = 1001
 
-    fun isRunning(): Boolean = try { Shizuku.pingBinder() } catch (e: Exception) { false }
-    fun hasPermission(): Boolean = try { Shizuku.checkSelfPermission() == PackageManager.PERMISSION_GRANTED } catch (e: Exception) { false }
-    
+    fun isRunning(): Boolean = try { 
+        Shizuku.pingBinder() 
+    } catch (e: Exception) { 
+        false 
+    }
+
+    fun hasPermission(): Boolean = try { 
+        Shizuku.checkSelfPermission() == PackageManager.PERMISSION_GRANTED 
+    } catch (e: Exception) { 
+        false 
+    }
+
     fun requestPermission() { 
-        try { Shizuku.requestPermission(REQUEST_CODE) } catch (e: Exception) {} 
+        try { 
+            Shizuku.requestPermission(REQUEST_CODE) 
+        } catch (e: Exception) {} 
     }
 
     suspend fun execute(script: String): String = withContext(Dispatchers.IO) {
-        if (!hasPermission() || !isRunning()) return@withContext "ERROR: Shizuku belum aktif."
+        if (!hasPermission() || !isRunning()) {
+            return@withContext "ERROR: Shizuku belum aktif."
+        }
+        
         try {
             val cmd = arrayOf("sh", "-c", script)
             val env = arrayOf("PATH=/sbin:/system/sbin:/system/bin:/system/xbin")
             
-            val pfdRaw = Shizuku.newProcess(cmd, env, null)
-            val pfd = pfdRaw as Array<ParcelFileDescriptor>
+            // Di Shizuku v12, ini ngembaliin ShizukuRemoteProcess
+            val process = Shizuku.newProcess(cmd, env, null)
             
-            val stdout = BufferedReader(InputStreamReader(ParcelFileDescriptor.AutoCloseInputStream(pfd[0])))
-            val stderr = BufferedReader(InputStreamReader(ParcelFileDescriptor.AutoCloseInputStream(pfd[2])))
+            // Ambil stream langsung dari objek process-nya
+            val stdout = BufferedReader(InputStreamReader(process.inputStream))
+            val stderr = BufferedReader(InputStreamReader(process.errorStream))
+            
             val output = StringBuilder()
             var line: String?
             
-            while (stdout.readLine().also { line = it } != null) output.append(line).append("\n")
-            while (stderr.readLine().also { line = it } != null) output.append("ERR: ").append(line).append("\n")
+            while (stdout.readLine().also { line = it } != null) {
+                output.append(line).append("\n")
+            }
+            while (stderr.readLine().also { line = it } != null) {
+                output.append("ERR: ").append(line).append("\n")
+            }
             
-            stdout.close(); stderr.close()
-            output.toString().ifEmpty { "OK: Script berhasil." }
-        } catch (e: Exception) { 
-            "FATAL: ${e.message}" 
+            stdout.close()
+            stderr.close()
+            
+            // Tunggu prosesnya selesai
+            process.waitFor()
+            
+            val result = output.toString().trim()
+            if (result.isEmpty()) "OK: Script berhasil dijalankan." else result
+            
+        } catch (e: Exception) {
+            "FATAL: ${e.message}"
         }
     }
 }
